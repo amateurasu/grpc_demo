@@ -1,0 +1,42 @@
+syntax = "proto3";
+package com.viettel.ems;
+
+option java_package = "vn.elite.test";
+option java_outer_classname = "Messages";
+
+enum Connection {
+  GSM = 0;
+  NBIOT = 1;
+}
+
+message Wifi {
+  Type type = 1;
+  int32 battery = 2;
+  Connection connection = 3;
+  repeated Cell cells = 4;
+  repeated AP aps = 5;
+
+  enum Type {
+    WIFI = 0;
+    SOS = 1;
+  }
+
+  message Cell {
+    int32 cid = 1;
+    int32 lac = 2;
+    int32 mac = 3;
+    int32 mnc = 4;
+    int32 signal = 5;
+  }
+
+  message AP {
+    int32 signal = 1;
+    bytes mac = 2;
+  }
+}
+
+message GPS {
+  Connection connection = 1;
+  float latitude = 2;
+  float longitude = 3;
+}
